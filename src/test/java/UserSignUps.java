@@ -15,7 +15,8 @@ public class UserSignUps extends BaseAPITest{
     public void successfulRegistrationTest(){
         //Resource end point > /api/auth/signup
        //String signUpEndpointResource = "/api/auth/signup";
-        String email = UUID.randomUUID().toString() + "@ultralesson.com";
+       // String email = UUID.randomUUID().toString() + "@ultralesson.com";
+        String email = "praveennayak@gmail.com";
         String password = "8447_22@12s";
 
         UserClient userClient = new UserClient();
