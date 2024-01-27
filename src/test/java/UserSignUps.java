@@ -1,3 +1,5 @@
+import clients.UserClient;
+import java.util.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -12,15 +14,18 @@ public class UserSignUps extends BaseAPITest{
     @Test
     public void successfulRegistrationTest(){
         //Resource end point > /api/auth/signup
-        String signUpEndpointResource = "/api/auth/signup";
-        String email = "maardaala734@hello.com";
-        String password = "8447_22@11s";
+       //String signUpEndpointResource = "/api/auth/signup";
+        String email = UUID.randomUUID().toString() + "@ultralesson.com";
+        String password = "8447_22@12s";
 
-        String signUpRequestBody = String.format("{\"email\": \"%s\", \"password\": \"%s\"}", email, password);
-        Response response = RestAssured.given()
-                .contentType(ContentType.JSON)
-                .body(signUpRequestBody)
-                .post(signUpEndpointResource);
+        UserClient userClient = new UserClient();
+        Response response = userClient.createUser(email, password);
+
+        // String signUpRequestBody = String.format("{\"email\": \"%s\", \"password\": \"%s\"}", email, password);
+        // Response response = RestAssured.given()
+        //         .contentType(ContentType.JSON)
+        //         .body(signUpRequestBody)
+        //         .post(signUpEndpointResource);
 
         int statusCode = response.getStatusCode();
        String authenticatedEmailId = response.jsonPath().get("data.user.email");
